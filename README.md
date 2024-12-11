@@ -1,34 +1,34 @@
-# **Basil Energetics Private Ltd - Price Calculator**  
+# **Basil Energetics Private Ltd - Price Calculator**
 
-## **Project Overview**  
-This project is a **Solar Energy Price Calculator** for **Basil Energetics Private Ltd**. It enables users to calculate solar panel requirements, rooftop area, PV panel rating, and overall cost based on the electrical appliances and their quantities. The app also saves customer details and appliance data to a MySQL database for record-keeping.
+## **Project Overview**
+This project is a **Solar Energy Price Calculator** for **Basil Energetics Private Ltd**. It enables users to calculate solar panel requirements, rooftop area, PV panel rating, and overall cost based on the electrical appliances and their quantities. The app also saves customer details, appliance data, and calculated results to a MySQL database for record-keeping.
 
 ---
 
-## **Features**  
-- Calculate solar panel requirements and costs.  
-- Interactive and user-friendly interface using Streamlit.  
-- Save customer and appliance data to a MySQL database.  
+## **Features**
+- Calculate solar panel requirements and costs.
+- Interactive and user-friendly interface using Streamlit.
+- Save customer, appliance data, and calculated results to a MySQL database.
 - Display results dynamically and aesthetically.
 
 ---
 
-## **Requirements**  
+## **Requirements**
 
-### **Software Prerequisites**  
-- Python (3.8 or above)  
-- MySQL Server  
+### **Software Prerequisites**
+- Python (3.8 or above)
+- MySQL Server
 - Streamlit (Python package)
 
-### **Python Libraries**  
-Install the required Python libraries using the following command:  
+### **Python Libraries**
+Install the required Python libraries using the following command:
 ```bash
 pip install streamlit mysql-connector-python
 ```
 
 ---
 
-## **Setting Up the Database**  
+## **Setting Up the Database**
 
 ### **Step 1: Create the Database**
 1. Open MySQL Workbench or the MySQL CLI.
@@ -55,17 +55,21 @@ CREATE TABLE sales_data (
     qty_12w_bulb INT,
     qty_15w_street_light INT,
     qty_24w_street_light INT,
-    qty_other_loads INT
+    qty_other_loads INT,
+    roundoff_panel_no INT,
+    rooftop_area FLOAT,
+    pv_panel_rating FLOAT,
+    final_cost FLOAT
 );
 ```
 
-### **Step 2: Configure Database Access**  
-Before running the application, ensure to configure your MySQL credentials in the `app.py` file.  
+### **Step 2: Configure Database Access**
+Before running the application, ensure to configure your MySQL credentials in the `app.py` file.
 
-- Open the `app.py` file in any code editor.  
-- Replace the placeholders `<YOUR_HOST>`, `<YOUR_USER>`, and `<YOUR_PASSWORD>` in the database connection code with your MySQL details.  
+- Open the `app.py` file in any code editor.
+- Replace the placeholders `<YOUR_HOST>`, `<YOUR_USER>`, and `<YOUR_PASSWORD>` in the database connection code with your MySQL details.
 
-For example:  
+For example:
 ```python
 conn = mysql.connector.connect(
     host="<YOUR_HOST>",
@@ -74,13 +78,16 @@ conn = mysql.connector.connect(
     database="basil_energetics"
 )
 ```
+
+---
+
 ## **Running the Application**
 
 ### **Step 1: Place the Logo**
-- Save your company logo at `BEPL_picture.jpg`.
+- Save your company logo as `BEPL_picture.jpg` in the same folder as `app.py`.
 
 ### **Step 2: Launch the App**
-Run the following command in the terminal:  
+Run the following command in the terminal:
 ```bash
 streamlit run app.py
 ```
@@ -89,27 +96,27 @@ streamlit run app.py
 
 ## **Using the Application**
 
-1. **Fill Customer Details**:  
-   Enter the customer name, phone number, and salesman name.  
+1. **Fill Customer Details**:
+   Enter the customer name, phone number, and salesman name.
 
-2. **Input Appliance Quantities**:  
-   Provide the quantities of appliances.  
+2. **Input Appliance Quantities**:
+   Provide the quantities of appliances.
 
-3. **Click "Calculate"**:  
-   View the solar panel requirements, rooftop area, and total cost.  
+3. **Click "Calculate"**:
+   View the solar panel requirements, rooftop area, and total cost.
 
-4. **Save to Database**:  
-   Click "Load to Database" to store the data in MySQL.
+4. **Save to Database**:
+   Click "Load to Database" to store the data (including calculated results) in MySQL.
 
 ---
 
-## **Viewing Saved Data**  
+## **Viewing Saved Data**
 
 ### **Step 1: Access MySQL**
 Log into your MySQL server using Workbench or CLI.
 
 ### **Step 2: Query Data**
-Run the following command to view saved data:  
+Run the following command to view saved data:
 ```sql
 USE basil_energetics;
 SELECT * FROM sales_data;
@@ -128,13 +135,13 @@ SELECT * FROM sales_data;
 
 ---
 
-## **Author**  
-- **Name**: Vishnuprasaath M  
+## **Author**
+- **Name**: Vishnuprasaath M
 - **Contact**: [LinkedIn Profile](https://www.linkedin.com/in/vishnuprasaath-m-0298a0287)
 
 ---
 
-## **License**  
+## **License**
 This project is licensed under **Basil Energetics Pvt Ltd**. Unauthorized use or modification without permission is prohibited.
 
 ---
