@@ -71,16 +71,15 @@ if st.button("Calculate"):
     st.info(f"Customer Phone Number: {customer_phone}")
     st.info(f"Salesman Name: {salesman_name}")
 
-
 # Save to Database Button
 if st.button("Load to Database"):
     if customer_name and customer_phone and salesman_name:
         try:
             conn = mysql.connector.connect(
-            host="<YOUR_HOST>",
-            user="<YOUR_USER>",
-            password="<YOUR_PASSWORD>",
-            database="basil_energetics" 
+                host="<YOUR_HOST>",
+                user="<YOUR_USER>",
+                password="<YOUR_PASSWORD>",
+                database="basil_energetics"
             )
             cursor = conn.cursor()
 
@@ -91,10 +90,10 @@ if st.button("Load to Database"):
                     qty_1_ton_ac, qty_1_5_ton_ac, qty_50l_fridge, qty_180l_fridge, 
                     qty_300l_fridge, qty_ceiling_fan, qty_tube_light, qty_7w_bulb, 
                     qty_9w_bulb, qty_12w_bulb, qty_15w_street_light, qty_24w_street_light, 
-                    qty_other_loads
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    qty_other_loads, roundoff_panel_no, rooftop_area, pv_panel_rating, final_cost
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """, (
-                customer_name, customer_phone, salesman_name, *qty
+                customer_name, customer_phone, salesman_name, *qty, roundoff_panel_no, rooftop_area, pv_panel_rating, final_cost
             ))
             conn.commit()
             st.success("Data successfully saved to the database!")
@@ -105,7 +104,6 @@ if st.button("Load to Database"):
             conn.close()
     else:
         st.error("Please fill in all Customer & Sales Details.")
-
 
 st.markdown("---")
 st.write("🌍 Powered by **Basil Energetics Private Ltd** - Let's go solar!")
